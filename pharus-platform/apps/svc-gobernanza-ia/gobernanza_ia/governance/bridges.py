@@ -19,29 +19,10 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 from gobernanza_ia.contracts.contract import PrivacyContract
-from gobernanza_ia.governance.taxonomy import SENSITIVE_CATEGORIES
+from gobernanza_ia.governance.taxonomy import CATEGORY_LABEL_ES, SENSITIVE_CATEGORIES
 from gobernanza_ia.scanner.models import AgentAsset, RiskTier, Severity
 
-# Mapeo de categoría Pharus → texto del RAT original (data_categories / sensitive_data_categories)
-RAT_CATEGORY_LABEL = {
-    "identifier": "Identificación",
-    "national_id": "Identificación (RUT)",
-    "contact": "Contacto",
-    "address": "Domicilio",
-    "financial": "Datos financieros",
-    "health": "Salud",
-    "biometric": "Biométricos",
-    "genetic": "Genéticos",
-    "minors": "Niños, niñas y adolescentes",
-    "political": "Opiniones políticas",
-    "religion": "Creencias religiosas",
-    "sexual_orientation": "Vida u orientación sexual",
-    "location": "Geolocalización",
-    "employment": "Laborales",
-    "credentials": "Credenciales",
-    "behavioral": "Comportamiento / perfilamiento",
-    "other": "Otros",
-}
+RAT_CATEGORY_LABEL = CATEGORY_LABEL_ES
 
 
 class RatTreatmentDraft(BaseModel):

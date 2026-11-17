@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse, PlainTextResponse
+from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse
 from pydantic import BaseModel
 
 from gobernanza_ia import __version__
@@ -215,6 +215,20 @@ def reiniciar() -> dict[str, bool]:
 
 
 # ----------------------------------------------------------------------------- mockup (mf-gobernanza-ia)
-@app.get("/", include_in_schema=False)
-def index() -> FileResponse:
-    return FileResponse(WEB / "index.html")
+SKELETON = (
+    '<!doctype html><html lang="es"><head><meta charset="utf-8">'
+    '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'
+    "<style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}"
+    "body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>"
+)
+
+
+@app.get("/", include_in_schema=False, response_class=HTMLResponse)
+def index() -> str:
+    """El mockup se escribe sin esqueleto (como un remote de Native Federation); aquí se envuelve."""
+    return SKELETON + (WEB / "index.html").read_text(encoding="utf-8") + "</body></html>"
+
+
+@app.get("/demo-data.js", include_in_schema=False)
+def demo_data() -> FileResponse:
+    return FileResponse(WEB / "demo-data.js", media_type="application/javascript")

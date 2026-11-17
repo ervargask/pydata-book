@@ -7,7 +7,7 @@ La clase EU AI Act es orientativa (no es asesoría legal).
 
 from __future__ import annotations
 
-from gobernanza_ia.governance.taxonomy import SENSITIVE_CATEGORIES, DataCategory
+from gobernanza_ia.governance.taxonomy import CATEGORY_LABEL_ES, SENSITIVE_CATEGORIES, DataCategory
 from gobernanza_ia.scanner.models import (
     AgentAsset,
     AssetKind,
@@ -38,7 +38,7 @@ def assess(asset: AgentAsset) -> tuple[RiskAssessment, list[Finding]]:
         f.append(RiskFactor(name="autonomía", points=10, reason="Ejecuta un loop con herramientas (decide acciones)."))
 
     if sensitive:
-        f.append(RiskFactor(name="datos sensibles", points=25, reason=f"Trata datos sensibles: {', '.join(sorted(c.value for c in sensitive))}."))
+        f.append(RiskFactor(name="datos sensibles", points=25, reason=f"Trata datos sensibles: {', '.join(sorted(CATEGORY_LABEL_ES[c.value].lower() for c in sensitive))}."))
     elif asset.data_categories - {DataCategory.CREDENTIALS}:
         f.append(RiskFactor(name="datos personales", points=10, reason="Trata datos personales."))
 
@@ -56,7 +56,7 @@ def assess(asset: AgentAsset) -> tuple[RiskAssessment, list[Finding]]:
 
     risky_fx = fx & {SideEffect.CODE_EXEC, SideEffect.PAYMENT, SideEffect.EMAIL, SideEffect.DATABASE}
     if risky_fx and not asset.human_in_loop:
-        f.append(RiskFactor(name="acciones sin supervisión humana", points=20, reason=f"Herramientas con efectos ({', '.join(sorted(e.value for e in risky_fx))}) sin aprobación humana."))
+        f.append(RiskFactor(name="acciones sin supervisión humana", points=20, reason=f"Herramientas con efectos ({', '.join(sorted({'payment':'pagos','email':'correo','database':'base de datos','code_exec':'ejecución de código'}[e.value] for e in risky_fx))}) sin aprobación humana."))
         findings.append(
             Finding(
                 code="PH-IA-002",

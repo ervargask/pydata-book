@@ -76,3 +76,25 @@ CATEGORY_HINTS: dict[DataCategory, tuple[str, ...]] = {
     DataCategory.CREDENTIALS: ("password", "contrasena", "contraseña"),
     DataCategory.BEHAVIORAL: ("clickstream", "browsing", "tracking", "segment", "profiling", "perfilamiento"),
 }
+
+
+# Etiquetas en español (las mismas que usa el RAT en data_categories)
+CATEGORY_LABEL_ES = {
+    "identifier": "Identificación",
+    "national_id": "Identificación (RUT)",
+    "contact": "Contacto",
+    "address": "Domicilio",
+    "financial": "Datos financieros",
+    "health": "Salud",
+    "biometric": "Biométricos",
+    "genetic": "Genéticos",
+    "minors": "Niños, niñas y adolescentes",
+    "political": "Opiniones políticas",
+    "religion": "Creencias religiosas",
+    "sexual_orientation": "Vida u orientación sexual",
+    "location": "Geolocalización",
+    "employment": "Laborales",
+    "credentials": "Credenciales",
+    "behavioral": "Comportamiento / perfilamiento",
+    "other": "Otros",
+}
