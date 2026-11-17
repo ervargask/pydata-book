@@ -72,7 +72,7 @@ CATEGORY_HINTS: dict[DataCategory, tuple[str, ...]] = {
     DataCategory.RELIGION: ("religion", "religio"),
     DataCategory.SEXUAL_ORIENTATION: ("sexual_orientation", "orientacion_sexual"),
     DataCategory.LOCATION: ("geoloc", "latitude", "longitude", "gps", "ubicacion"),
-    DataCategory.EMPLOYMENT: ("candidate", "candidato", "resume", "curriculum", "cv_", "employee", "empleado", "hiring", "contratacion", "performance_review"),
-    DataCategory.CREDENTIALS: ("password", "contrasena", "secret", "api_key", "token"),
+    DataCategory.EMPLOYMENT: ("candidate_", "candidato", "resume_", "curriculum", "cv_", "employee", "empleado", "hiring", "contratacion", "performance_review"),
+    DataCategory.CREDENTIALS: ("password", "contrasena", "contraseña"),
     DataCategory.BEHAVIORAL: ("clickstream", "browsing", "tracking", "segment", "profiling", "perfilamiento"),
 }

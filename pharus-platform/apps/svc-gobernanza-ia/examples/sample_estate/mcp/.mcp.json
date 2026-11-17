@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "fichas-postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://localhost/fichas_paciente"],
+      "env": { "PGPASSWORD": "aurora-2026" }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/srv/documentos"]
+    },
+    "busqueda-web": {
+      "url": "https://mcp.buscador.demo/sse",
+      "env": { "BUSCADOR_API_KEY": "${BUSCADOR_API_KEY}" }
+    }
+  }
+}
